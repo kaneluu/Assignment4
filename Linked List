@@ -1,0 +1,29 @@
+package lab4;
+
+
+public class LinkedList {
+
+	public Node headNode;
+	
+	public void addNode (int x, int y) {
+		
+		Node oNode = new Node();
+		oNode.xPosition = x;
+		oNode.yPosition = y;
+		
+		oNode.nextNode = headNode;
+		
+		headNode = oNode;
+	
+} // end addNode
+	
+	public Node removeHeadNode() {
+		
+		Node temp = headNode;
+		headNode = headNode.nextNode;
+		
+		return temp;
+	
+} // end removeNode
+	
+} // end class
