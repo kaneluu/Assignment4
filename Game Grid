@@ -1,0 +1,92 @@
+import java.security.SecureRandom;
+import java.util.Scanner;
+
+public class GameGrid {
+	
+	public void run() {
+		
+		LinkedList iList = new LinkedList();
+		
+		
+		Scanner input = new Scanner (System.in);
+		
+		int [][] gameGrid = new int [10][10];
+		SecureRandom oRand = new SecureRandom();
+		int	iWallChance = 10;
+		
+			
+		for (int x=0; x < gameGrid.length; x++) {
+			for (int y=0; y < gameGrid[0].length; y++) {
+				
+					if (oRand.nextInt(100) < iWallChance){
+						gameGrid[x][y] = 1;
+					}
+					else {
+						gameGrid[x][y] = 0;
+					}
+			}
+			gameGrid [0][0] = 0;
+		}
+		
+		int iUserRow = 0;
+		int iUserCol = 0;
+		
+		boolean check = true;
+		
+		while (check == true) {
+			
+			System.out.println("Please select which way to go: ");
+				
+				iList.addNode(iUserRow, iUserCol); 	
+				String answer = input.next();
+				
+				if (answer.equalsIgnoreCase("down")) {
+					iUserRow++;
+				}
+				else if (answer.equalsIgnoreCase("right")) {
+					iUserCol++;
+				}
+				
+				
+			if (gameGrid[iUserRow][iUserCol] == 1) {
+				System.out.println("You are failed");
+				check = false;
+			}
+			else if ( iUserRow == 9 || iUserCol == 9) {
+					System.out.println("You win");
+					check = false;
+			}
+		}
+		
+		int counter = 0;
+	while (iList.headNode != null ) 
+	{
+		counter++;
+		Node temp;
+		temp = iList.removeHeadNode();
+		gameGrid[temp.xPosition][temp.yPosition] = 5;
+		
+	}
+		//counter is total moves
+		for (int x=0; x < gameGrid.length; x++) 
+		{	
+			for (int y=0; y < gameGrid[0].length; y++) 
+			{
+				if (x == iUserRow && y == iUserCol)
+				{ 
+					
+					System.out.print("X ");
+				}
+				else
+				{
+				System.out.print(gameGrid[x][y] + " " );
+				}
+			}
+		System.out.println("");
+	}
+		System.out.print("Total Moves: " + counter + " moves were made.\n");
+input.close();
+}
+
+}
+		
